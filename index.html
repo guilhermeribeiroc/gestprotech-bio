@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>GestProTech — Gestão completa pra escritórios de advocacia</title>
+<meta name="description" content="Acesse o sistema ou fale com a gente no WhatsApp.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+    :root {
+        --navy-950: #070c15;
+        --navy-900: #0b1220;
+        --navy-800: #0f1b30;
+        --navy-700: #16294a;
+        --teal-400: #2dd4bf;
+        --teal-500: #14b8a6;
+        --teal-300: #5eead4;
+        --gold-400: #f5b942;
+        --whats: #25D366;
+        --ink: #e7ecf6;
+        --ink-dim: #9fb0d1;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    body {
+        margin: 0;
+        min-height: 100svh;
+        background: var(--navy-950);
+        color: var(--ink);
+        font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+    }
+    .disp { font-family: 'Fraunces', Georgia, serif; }
+
+    /* ── Atmosphere ──────────────────────────────────────── */
+    .bg-scene {
+        position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        background:
+            radial-gradient(ellipse 700px 500px at 18% -8%, rgba(45,212,191,0.16), transparent 60%),
+            radial-gradient(ellipse 600px 450px at 100% 18%, rgba(245,185,66,0.10), transparent 55%),
+            radial-gradient(ellipse 800px 600px at 50% 100%, rgba(20,184,166,0.08), transparent 60%),
+            linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 45%, var(--navy-950) 100%);
+    }
+    .bg-scene::before {
+        content: ''; position: absolute; inset: 0; opacity: .55;
+        background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+        background-size: 24px 24px;
+        mask-image: radial-gradient(ellipse 900px 700px at 50% 0%, #000 40%, transparent 78%);
+    }
+
+    .page { position: relative; z-index: 1; }
+
+    /* ── Hero / card ─────────────────────────────────────── */
+    /* Sem min-height:100vh forçado de propósito — em celular, isso some
+       atrás da barra de endereço/gesto e faz o último botão parecer
+       cortado. Fluxo natural com bastante respiro em cima/embaixo
+       (considerando a área segura do notch/gesto via env()) garante que
+       nada fica escondido, custe o que custar um scroll a mais. */
+    .hero {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: max(3.2rem, calc(env(safe-area-inset-top, 0px) + 2.2rem)) 1.5rem 2rem;
+        text-align: center;
+    }
+    .avatar {
+        width: 92px; height: 92px; border-radius: 26px; margin-bottom: 1.4rem;
+        background: linear-gradient(160deg, var(--navy-700), var(--navy-900));
+        border: 1px solid rgba(94,234,212,0.18); overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 20px 50px -18px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.03);
+        opacity: 0; animation: riseIn .7s cubic-bezier(.2,.8,.2,1) .05s forwards;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    h1 {
+        font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(1.7rem, 6vw, 2.15rem);
+        letter-spacing: -0.02em; margin: 0 0 .5rem; color: #fff;
+        opacity: 0; animation: riseIn .7s cubic-bezier(.2,.8,.2,1) .15s forwards;
+    }
+    .tagline {
+        color: var(--ink-dim); font-size: .96rem; line-height: 1.55; max-width: 320px; margin: 0 0 2.2rem;
+        opacity: 0; animation: riseIn .7s cubic-bezier(.2,.8,.2,1) .24s forwards;
+    }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    /* ── Buttons ─────────────────────────────────────────── */
+    .links { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: .9rem; }
+    .btn-link {
+        position: relative; display: flex; align-items: center; gap: 1rem;
+        padding: 1.05rem 1.2rem; border-radius: 20px; text-decoration: none;
+        font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink);
+        background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+        border: 1px solid rgba(255,255,255,.09);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 1px 0 0 rgba(255,255,255,.06) inset, 0 18px 34px -20px rgba(0,0,0,.6);
+        overflow: hidden; isolation: isolate;
+        transition: transform .2s cubic-bezier(.2,.8,.2,1), border-color .2s, box-shadow .2s;
+        opacity: 0; animation: riseIn .6s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .links .btn-link:nth-child(1) { animation-delay: .34s; }
+    .links .btn-link:nth-child(2) { animation-delay: .42s; }
+    .links .btn-link:nth-child(3) { animation-delay: .50s; }
+
+    /* Brilho diagonal que varre o botão no hover — só some quando o
+       ponteiro sai, então em touch (sem :hover real) o botão continua
+       limpo e o efeito não atrapalha. */
+    .btn-link::after {
+        content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.14) 50%, transparent 60%);
+        transform: translateX(-120%); transition: transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+    .btn-link:hover::after { transform: translateX(120%); }
+    .btn-link:hover { transform: translateY(-2px); }
+    .btn-link:active { transform: scale(.97); }
+
+    .btn-link .ic {
+        position: relative; z-index: 2; flex-shrink: 0; width: 44px; height: 44px; border-radius: 13px;
+        display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff;
+        box-shadow: 0 1px 0 0 rgba(255,255,255,.25) inset, 0 6px 16px -6px rgba(0,0,0,.5);
+    }
+    .btn-link .txt { position: relative; z-index: 2; flex: 1; text-align: left; }
+    .btn-link .txt small { display: block; font-weight: 600; font-size: .75rem; color: var(--ink-dim); margin-top: .15rem; }
+    .btn-link .arrow {
+        position: relative; z-index: 2; width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center; font-size: .82rem;
+        background: rgba(255,255,255,.06); color: var(--ink-dim);
+        transition: transform .2s cubic-bezier(.2,.8,.2,1), background .2s, color .2s;
+    }
+    .btn-link:hover .arrow { transform: translateX(2px); background: rgba(255,255,255,.12); color: #fff; }
+
+    .btn-primary { border-color: rgba(45,212,191,.28); }
+    .btn-primary .ic { background: linear-gradient(150deg, var(--teal-400), #0d9488); }
+    .btn-primary:hover { box-shadow: 0 1px 0 0 rgba(255,255,255,.06) inset, 0 20px 40px -16px rgba(20,184,166,.45); border-color: rgba(94,234,212,.5); }
+
+    .btn-whats { border-color: rgba(37,211,102,.28); }
+    .btn-whats .ic { background: linear-gradient(150deg, #34e07f, #0f9d54); }
+    .btn-whats:hover { box-shadow: 0 1px 0 0 rgba(255,255,255,.06) inset, 0 20px 40px -16px rgba(37,211,102,.4); border-color: rgba(52,224,127,.5); }
+
+    .btn-ghost { border-color: rgba(245,185,66,.22); }
+    .btn-ghost .ic { background: linear-gradient(150deg, var(--gold-400), #c9871a); }
+    .btn-ghost:hover { box-shadow: 0 1px 0 0 rgba(255,255,255,.06) inset, 0 20px 40px -16px rgba(245,185,66,.35); border-color: rgba(245,185,66,.45); }
+
+    .scroll-cue {
+        margin-top: 2.6rem; display: flex; flex-direction: column; align-items: center; gap: .4rem;
+        color: var(--ink-dim); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+        opacity: 0; animation: riseIn .6s ease .65s forwards, bob 2.2s ease-in-out 1.4s infinite;
+    }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+    /* ── Features strip ──────────────────────────────────── */
+    .features {
+        max-width: 480px; margin: 0 auto; padding: 1rem 1.5rem 4rem;
+        display: flex; flex-direction: column; gap: .7rem;
+    }
+    .features-title {
+        text-align: center; color: var(--ink-dim); font-size: .72rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: .12em; margin-bottom: 1.2rem;
+    }
+    .feature-row {
+        display: flex; align-items: center; gap: .9rem; padding: 1rem 1.1rem;
+        background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.07); border-radius: 14px;
+        opacity: 0; transform: translateY(16px);
+    }
+    .feature-row.in-view { animation: riseIn .6s cubic-bezier(.2,.8,.2,1) forwards; }
+    .feature-row .ic { width: 36px; height: 36px; border-radius: 10px; background: rgba(45,212,191,.12); color: var(--teal-400); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0; }
+    .feature-row b { display: block; font-size: .87rem; color: #fff; }
+    .feature-row span { display: block; font-size: .76rem; color: var(--ink-dim); margin-top: .1rem; }
+
+    footer {
+        text-align: center; color: var(--ink-dim); font-size: .72rem;
+        padding: 0 1.5rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem));
+    }
+    footer a { color: var(--teal-300); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="bg-scene"></div>
+
+<div class="page">
+    <section class="hero">
+        <div class="avatar"><img src="assets/logo.png" alt="GestProTech"></div>
+        <h1>GestProTech</h1>
+        <p class="tagline">Gestão completa pra escritórios de advocacia — processos, agenda, financeiro e publicações num só lugar.</p>
+
+        <nav class="links">
+            <a class="btn-link btn-primary" href="https://site.gestprotech.com.br" target="_blank" rel="noopener">
+                <span class="ic"><i class="bi bi-box-arrow-up-right"></i></span>
+                <span class="txt">Acessar o Sistema<small>Conheça o GestProTech</small></span>
+                <i class="bi bi-arrow-right arrow"></i>
+            </a>
+            <a class="btn-link btn-whats" href="https://wa.me/5588993699357" target="_blank" rel="noopener">
+                <span class="ic"><i class="bi bi-whatsapp"></i></span>
+                <span class="txt">Falar no WhatsApp<small>Tire suas dúvidas na hora</small></span>
+                <i class="bi bi-arrow-right arrow"></i>
+            </a>
+            <a class="btn-link btn-ghost" href="https://gestprotech.com.br/registrar/" target="_blank" rel="noopener">
+                <span class="ic"><i class="bi bi-rocket-takeoff"></i></span>
+                <span class="txt">Cadastre seu Escritório<small>Comece a usar agora</small></span>
+                <i class="bi bi-arrow-right arrow"></i>
+            </a>
+        </nav>
+
+        <div class="scroll-cue"><span>Ver mais</span><i class="bi bi-chevron-down"></i></div>
+    </section>
+
+    <section class="features">
+        <div class="features-title">O que você gerencia no GestProTech</div>
+        <div class="feature-row" data-reveal>
+            <span class="ic"><i class="bi bi-folder2-open"></i></span>
+            <div><b>Processos e Clientes</b><span>Cadastro completo, sem limite de volume</span></div>
+        </div>
+        <div class="feature-row" data-reveal>
+            <span class="ic"><i class="bi bi-calendar-week"></i></span>
+            <div><b>Agenda &amp; Atendimentos</b><span>Compromissos, prazos e conversão de cliente</span></div>
+        </div>
+        <div class="feature-row" data-reveal>
+            <span class="ic"><i class="bi bi-newspaper"></i></span>
+            <div><b>Publicações com OAB Monitorada</b><span>Intimações do DJEN direto no sistema</span></div>
+        </div>
+        <div class="feature-row" data-reveal>
+            <span class="ic"><i class="bi bi-cash-coin"></i></span>
+            <div><b>Financeiro</b><span>Honorários, parcelas e relatórios num clique</span></div>
+        </div>
+    </section>
+
+    <footer>
+        © <span id="ano"></span> GestProTech — <a href="https://gestprotech.com.br">gestprotech.com.br</a>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+document.getElementById('ano').textContent = new Date().getFullYear();
+
+// Lenis — rolagem suave com inércia. Página curta, mas o scroll até os
+// destaques abaixo do botão fica com aquele "peso" de site premium em
+// vez do scroll seco padrão do navegador.
+if (window.Lenis) {
+    var lenis = new Lenis({ duration: 1.05, smoothWheel: true, syncTouch: false });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+}
+
+document.querySelector('.scroll-cue').addEventListener('click', function() {
+    document.querySelector('.features').scrollIntoView({ behavior: 'smooth' });
+});
+
+var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+        if (e.isIntersecting) {
+            e.target.style.animationDelay = (i * 0.08) + 's';
+            e.target.classList.add('in-view');
+            obs.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.2 });
+document.querySelectorAll('[data-reveal]').forEach(function(el) { obs.observe(el); });
+</script>
+
+</body>
+</html>
